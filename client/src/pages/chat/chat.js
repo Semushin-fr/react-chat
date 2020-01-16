@@ -13,7 +13,7 @@ export const Chat = ({history}) => {
   }
   return (
     <>
-      <Header/>
+      <Header history={history}/>
       <div className="container">
         <div className="main-chat">
           <Sidebar/>

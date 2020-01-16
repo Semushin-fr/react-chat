@@ -3,8 +3,14 @@ import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import './Header.css';
 
-export const Header = () => {
+export const Header = ({history}) => {
   const user = useSelector(state => state.chat.user);
+
+  if (!user) {
+    history.push('/');
+    return null
+  }
+
   return (
     <header className="header">
       <div className="container">

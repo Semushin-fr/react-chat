@@ -13,9 +13,8 @@ export const MessageList = () => {
             return (
               <li key={index}>
                 <span className='message-list__name'>
-                  {m.owner_name}
-                </span>
-                : {m.text}
+                  {m.owner_name}:
+                </span> {m.text}
               </li>
             )
           })
