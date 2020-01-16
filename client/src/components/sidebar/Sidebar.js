@@ -6,6 +6,9 @@ export const Sidebar = () => {
   const users = useSelector(state => state.chat.chatUsers);
   return (
     <div className="sidebar">
+      <div className="sidebar-title">
+        Users list
+      </div>
       <ul className="sidebar-list">
         {
           users.map(user => {

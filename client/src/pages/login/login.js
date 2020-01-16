@@ -37,7 +37,12 @@ const Login = ({socket, history}) => {
     <div className="login">
       <h1>Login</h1>
       <form className="login-form" onSubmit={onLogin}>
-        <input type="text" className="login-form__input" ref={userRef} />
+        <input
+          type="text"
+          className="login-form__input"
+          ref={userRef}
+          placeholder='Enter your name'
+        />
         <button type="submit" className="login-form__btn">Login</button>
       </form>
     </div>

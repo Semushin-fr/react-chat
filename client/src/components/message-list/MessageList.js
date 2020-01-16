@@ -12,7 +12,10 @@ export const MessageList = () => {
           messages.map((m, index) => {
             return (
               <li key={index}>
-                {m.owner_name}: {m.text}
+                <span className='message-list__name'>
+                  {m.owner_name}
+                </span>
+                : {m.text}
               </li>
             )
           })
