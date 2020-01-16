@@ -1,7 +1,7 @@
 import React from 'react';
 import {SocketConsumer} from "../socket-context/socket-context";
 
-const withScoket = () => (Wrapped) => {
+const withSocket = () => (Wrapped) => {
   return props => {
     return (
       <SocketConsumer>
@@ -17,4 +17,4 @@ const withScoket = () => (Wrapped) => {
   }
 };
 
-export default withScoket;
+export default withSocket;

@@ -47,3 +47,10 @@
 .login-form__btn:hover {
     background: #5c8bbf;
 }
+
+.error-message {
+    color: #ff0f3b;
+    font-size: 14px;
+    padding: 10px 0;
+    text-decoration: underline;
+}

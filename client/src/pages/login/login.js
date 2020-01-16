@@ -21,20 +21,45 @@ class Login extends Component {
     this.props.socket.addHandler('GetUserList', (res) => {
       this.props.addChatUsers(res.payload.users);
     });
+
+    this.props.socket.addError(() => {
+      this.errorHandler()
+    });
+
+    this.props.socket.setReconnect(() => {
+      if (this.props.user) {
+        this.login(this.props.user.name);
+      }
+    })
   }
 
-  onLogin = (event) => {
-    event.preventDefault();
+  state = {
+    error: false
+  };
+
+  login = (userName) => {
     const user = {
       type: 'Login',
       data: {
-        name: this.userRef.current.value || 'Guest'
+        name: userName || "Guest"
       }
     };
-    this.props.socket.getInstance().send(JSON.stringify(user));
+    this.props.socket.send(JSON.stringify(user));
+  };
+
+  onLogin = (event) => {
+    event.preventDefault();
+    this.login(this.userRef.current.value)
+  };
+
+  errorHandler = () => {
+    this.setState({
+      error: true
+    });
   };
 
   render() {
+    const errorMess = this.state.error ? <div className="error-message">Отсутствует подключение к серверу</div> : null
     return (
       <div className="login">
         <h1>Login</h1>
@@ -47,12 +72,15 @@ class Login extends Component {
           />
           <button type="submit" className="login-form__btn">Login</button>
         </form>
+        {errorMess}
       </div>
     )
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  user: state.chat.user
+});
 
 const mapDispatchToProps = {
   setUser,

@@ -16,7 +16,7 @@ class AddMessage extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.socket.getInstance().send(JSON.stringify({
+    this.props.socket.send(JSON.stringify({
       type: 'SendMessage',
       data: {
         text: this.inputRef.current.value
