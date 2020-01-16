@@ -35,7 +35,6 @@ wss.on('connection', (ws) => {
         break;
 
       case 'SendMessage':
-        console.log('SendMessage', _res.data)
         message = createMessage('SendMessage', {
           owner_name: ws.name,
           text: _res.data.text
@@ -45,7 +44,6 @@ wss.on('connection', (ws) => {
     }
   });
 
-  console.log('Server success');
 });
 
 function createMessage(type, payload) {
