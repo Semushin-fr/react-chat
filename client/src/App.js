@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import {Login} from "./pages/login/login";
+import Login from "./pages/login/login";
 import {Chat} from "./pages/chat";
 
 function App() {

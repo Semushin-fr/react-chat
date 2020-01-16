@@ -9,10 +9,10 @@ export const MessageList = () => {
     <div className="message-list">
       <ul>
         {
-          messages.map(m => {
+          messages.map((m, index) => {
             return (
-              <li key={m.id}>
-                 {m.text}
+              <li key={index}>
+                {m.owner_name}: {m.text}
               </li>
             )
           })

@@ -1,21 +1,36 @@
 import React, {useRef} from "react";
 import {useDispatch} from "react-redux";
 import "./login.css";
-import {addChatUser, setUser} from "../../store/actions/chat";
+import {addChatUser, setUser, addChatUsers} from "../../store/actions/chat";
+import withSocket from "../../components/hoc/withSocket";
 
-export const Login = ({history}) => {
+const Login = ({socket, history}) => {
   const userRef = useRef();
   const dispatch = useDispatch();
+
+  socket.addHandler('Login', (res) => {
+    dispatch(setUser(res.payload));
+    history.push('/chat');
+  });
+
+  socket.addHandler('NewUser', (res) => {
+    dispatch(addChatUser(res.payload));
+  });
+
+  socket.addHandler('GetUserList', (res) => {
+    dispatch(addChatUsers(res.payload.users));
+  });
 
   const onLogin = (event) => {
     event.preventDefault();
     const user = {
-      id: Date.now(),
-      name: userRef.current.value || 'Guest'
+      type: 'Login',
+      data: {
+        name: userRef.current.value || 'Guest'
+      }
     };
-    dispatch(setUser(user));
-    dispatch(addChatUser(user));
-    history.push('/chat');
+
+    socket.getInstance().send(JSON.stringify(user));
   };
 
   return (
@@ -28,3 +43,5 @@ export const Login = ({history}) => {
     </div>
   )
 };
+
+export default withSocket()(Login);

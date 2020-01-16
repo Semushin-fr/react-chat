@@ -1,7 +1,7 @@
-import {ADD_CHAT_USER, SEND_MESSAGE, SET_USER} from "../types";
+import {ADD_CHAT_USER, SEND_MESSAGE, SET_USER, ADD_CHAT_USERS} from "../types";
 
 const initialState = {
-  user: {},
+  user: null,
   chatUsers: [],
   messages: []
 };
@@ -26,6 +26,11 @@ export const chatReducer = (state = initialState, action) => {
       return {
         ...state,
         chatUsers: newChatUsers
+      };
+    case ADD_CHAT_USERS:
+      return {
+        ...state,
+        chatUsers: action.payload
       };
     default:
       return state
