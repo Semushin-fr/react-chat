@@ -11,7 +11,6 @@ class AddMessage extends Component {
     this.props.socket.addHandler('SendMessage', (res) => {
       this.props.sendMessage(res.payload)
     });
-    console.log(this.props.socket.handlers)
   };
 
   onSubmit = (event) => {

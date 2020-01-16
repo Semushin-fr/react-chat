@@ -20,6 +20,21 @@ const Chat = ({socket, history}) => {
     setError(true);
   });
 
+  socket.setReconnect(() => {
+    login(user.name);
+    setError(false)
+  });
+
+  const login = (userName) => {
+    const user = {
+      type: 'Login',
+      data: {
+        name: userName || "Guest"
+      }
+    };
+    socket.send(JSON.stringify(user));
+  };
+
   const errorMessage = error ? <div className="chat-error">Соединение с сервером потеряно</div> : null;
 
   return (
