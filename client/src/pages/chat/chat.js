@@ -4,13 +4,13 @@ import {Sidebar} from "../../components/sidebar/Sidebar";
 import {MessageList} from "../../components/message-list/MessageList";
 import AddMessage from "../../components/add-message/AddMessage";
 import {Header} from "../../components/header/Header";
-import './chat.css';
 import withSocket from "../../components/hoc/withSocket";
+import {useStyles} from "./chat-styles";
 
 const Chat = ({socket, history}) => {
   const user = useSelector(state => state.chat.user);
-
   const [error, setError] = useState(false);
+  const classes = useStyles();
 
   if (!user) {
     history.push('/');
@@ -35,15 +35,15 @@ const Chat = ({socket, history}) => {
     socket.send(JSON.stringify(user));
   };
 
-  const errorMessage = error ? <div className="chat-error">Соединение с сервером потеряно</div> : null;
+  const errorMessage = error ? <div className={classes.chatError}>Соединение с сервером потеряно</div> : null;
 
   return (
     <>
       <Header history={history}/>
       <div className="container">
-        <div className="main-chat">
+        <div className={classes.mainChat}>
           <Sidebar/>
-          <div className="chat">
+          <div className={classes.chat}>
             <MessageList/>
             <AddMessage/>
           </div>

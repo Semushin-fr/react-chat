@@ -1,15 +1,17 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import "./Sidebar.css";
+import {useStyles} from "./SidebarStyles";
 
 export const Sidebar = () => {
   const users = useSelector(state => state.chat.chatUsers);
+  const classes = useStyles();
+
   return (
-    <div className="sidebar">
-      <div className="sidebar-title">
+    <div className={classes.sidebar}>
+      <div className={classes.sidebarTitle}>
         Users list
       </div>
-      <ul className="sidebar-list">
+      <ul className={classes.sidebarList}>
         {
           users.map(user => {
             return (

@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import './Header.css';
+import {useStyles} from "./HeaderStyles";
 
 export const Header = ({history}) => {
   const user = useSelector(state => state.chat.user);
+  const classes = useStyles();
 
   if (!user) {
     history.push('/');
@@ -12,13 +13,13 @@ export const Header = ({history}) => {
   }
 
   return (
-    <header className="header">
+    <header className={classes.header}>
       <div className="container">
-        <div className="header-inner">
-          <div className="header-user">
+        <div className={classes.headerInner}>
+          <div className={classes.headerUser}>
             {user.name}
           </div>
-          <Link to="/" className="header-btn">
+          <Link to="/" className={classes.headerBtn}>
             Logout
           </Link>
         </div>

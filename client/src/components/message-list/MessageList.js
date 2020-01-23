@@ -1,18 +1,19 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import "./MessageList.css";
+import {useStyles} from "./MessageListStyles";
 
 export const MessageList = () => {
   const messages = useSelector(state => state.chat.messages);
+  const classes = useStyles();
 
   return (
-    <div className="message-list">
+    <div className={classes.messageList}>
       <ul>
         {
           messages.map((m, index) => {
             return (
               <li key={index}>
-                <span className='message-list__name'>
+                <span className={classes.messageListName}>
                   {m.owner_name}:
                 </span> {m.text}
               </li>
